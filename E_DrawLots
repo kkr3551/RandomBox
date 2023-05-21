@@ -1,0 +1,33 @@
+package RandomBox;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+public class E_DrawLots {
+	static BufferedReader DrawLots_br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter DrawLots_bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void lots() throws NumberFormatException, IOException{
+		while(true) {
+			DrawLots_bw.write("뽑을 것들을 입력하세요 ('이제이제그만'을 입력하면 끝납니다)\n"); DrawLots_bw.flush(); // 제비뽑기 당첨항목을 입력합니다
+			ArrayList op = new ArrayList();
+			while(true) {
+				String i = DrawLots_br.readLine();
+				if(i.equals("이제이제그만")) // '이제이제그만'을 적으면 종료합니다
+					break;
+				else
+					op.add(i);
+			}
+			Collections.shuffle(op); // 제비뽑기 항목을 섞습니다
+			for(int qq=0; qq<op.size(); qq++) { // 제비를 뽑습니다. 전부 뽑으면 다시 할지 물어봅니다
+				System.out.print(op.get(qq));
+				DrawLots_bw.write(" ('?'를 입력하면 종료, 그 외엔 다시 뽑기) >> "); DrawLots_bw.flush();
+				String mm=DrawLots_br.readLine();
+				if(mm.equals("?"))  // '?'를 입력하면 종료합니다
+					break;
+			}
+			DrawLots_bw.write("한판 더? / 'X'를 입력하면 종료, 그 외엔 반복"); DrawLots_bw.flush();
+			String mm=DrawLots_br.readLine();
+			if(mm.equals("X") || mm.equals("x")) // 'x'를 입력하면 종료합니다
+				System.exit(0);
+		}
+	}
+}

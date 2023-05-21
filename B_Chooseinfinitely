@@ -1,0 +1,29 @@
+package RandomBox;
+import java.io.*;
+import java.util.*;
+import java.util.stream.Stream;
+public class B_Chooseinfinitely {
+	static BufferedReader Choose_br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter Choose_bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	public static void Choose() throws NumberFormatException, IOException {
+		Choose_bw.write("뽑을 것들을 입력하세요 ('이제이제그만'을 입력하면 끝납니다)\n"); Choose_bw.flush();
+		ArrayList pitches = new ArrayList(); // 뽑을 것들을 리스트에 저장합니다
+		
+		while(true) { // '이제이제그만'을 입력하기 전까지 무한히 입력받습니다
+			String i = Choose_br.readLine();
+			if(i.equals("이제이제그만"))
+				break;
+			else
+				pitches.add(i);
+		}
+		
+		while(true) { // '?'를 입력하기 전까지 무한히 랜덤하게 원소를 출력합니다
+			Collections.shuffle(pitches);
+			Choose_bw.write(pitches.get(0)+" / ?를 입력하면 종료"); Choose_bw.flush();
+			String m=Choose_br.readLine();
+			if(m.equals("?"))
+				break;
+		}
+	}
+}

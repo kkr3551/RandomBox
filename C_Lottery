@@ -1,0 +1,84 @@
+package RandomBox;
+import java.io.*;
+import java.util.*;
+import java.util.stream.Stream;
+public class C_Lottery {
+	static BufferedReader Lottery_br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter Lottery_bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	public static void lotto() throws NumberFormatException, IOException { // 로또
+		while(true) {
+			Lottery_bw.write("로또 번호 개수 >> "); Lottery_bw.flush();
+			int num = Integer.parseInt(Lottery_br.readLine());
+			for(int m=0; m<num; m++) {
+				int lotto[]=new int [6]; // 번호 생성
+				for(int i=0; i<6; i++) {
+					lotto [i]=(int) (Math.random()*45)+1;
+					for(int j=0; j<i; j++) { // 중복 번호를 제거합니다
+						if(lotto[i]==lotto[j]) {
+							i--;
+							break;
+						}
+					}
+				}
+				Arrays.sort(lotto); // 정렬
+				Lottery_bw.write("로또 번호 "+(m+1)+" >> "); // 번호 출력 (시작)
+				for (int i=0; i<6; i++)
+					Lottery_bw.write(lotto[i]+" "); Lottery_bw.flush(); // 번호 출력 (번호)
+				System.out.println();
+			}
+			Lottery_bw.write("한판 더? / 'X'를 입력하면 종료, 그 외엔 반복"); Lottery_bw.flush();
+			String mm=Lottery_br.readLine();
+			if(mm.equals("X") || mm.equals("x")) // X를 누르면 종료합니다
+				System.exit(0);
+		}
+	}
+	
+	public static void annuity1() throws NumberFormatException, IOException { // 연금복권1 (뒷번호가 전부 다르게 작성됩니다)
+		while(true) {
+			Lottery_bw.write("연금 복권 번호 개수 >> "); Lottery_bw.flush(); // 복권 개수를 입력합니다
+			int num = Integer.parseInt(Lottery_br.readLine());
+			for(int m=0; m<num; m++) {
+				int yun[]=new int [7]; // 번호 생성
+				for(int i=0; i<7; i++) {
+					if(i==0)
+						yun [i]=(int) (Math.random()*5)+1; // 1~5 (앞의 한자리만 출력합니다)
+					else
+						yun [i]=(int) (Math.random()*10); // 0~9 (뒤의 6자리를 출력합니다)
+				}
+				Lottery_bw.write("연금 복권 번호"+(m+1)+" >> "); // 번호를 출력합니다
+				for (int i=0; i<7; i++) {
+					if(i==0) {
+						Lottery_bw.write(yun[i]+"조 "); Lottery_bw.flush();
+					}
+					else {
+						Lottery_bw.write(yun[i]+" "); Lottery_bw.flush(); // 번호 출력 (번호)
+					}
+				}
+				System.out.println();
+			}
+			Lottery_bw.write("한판 더? / 'X'를 입력하면 종료, 그 외엔 반복"); Lottery_bw.flush();
+			String mm=Lottery_br.readLine();
+			if(mm.equals("X") || mm.equals("x")) // X를 누르면 종료합니다
+				System.exit(0);
+		}
+	}
+	
+	public static void annuity2() throws NumberFormatException, IOException { // 연금복권2 (번호를 자동으로 5개 생성합니다)
+		while(true) {
+			int yun[]=new int [6]; // 번호 생성
+			for(int a=0; a<6; a++)
+				yun[a] = (int) (Math.random()*10);
+			for(int i=1; i<6; i++) {
+				Lottery_bw.write(i+"조 "); Lottery_bw.flush();
+				for(int j=0; j<6; j++)
+					Lottery_bw.write(yun[j]+" "); Lottery_bw.flush(); // 랜덤으로 넣어놓은 뒷자리를 출력합니다
+				System.out.println();
+			}
+			Lottery_bw.write("한판 더? / 'X'를 입력하면 종료, 그 외엔 반복"); Lottery_bw.flush();
+			String mm=Lottery_br.readLine();
+			if(mm.equals("X") || mm.equals("x")) // X를 누르면 종료합니다
+				System.exit(0);
+		}
+	}	
+}
